@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+// import {combineReducers} from 'redux';
 import {USER_SELECTED, ACCOUNT_SELECTED, WITHDRAW_FUNDS} from '../actions/index';
 import userList from '../../data/users';
 import update from 'immutability-helper';
@@ -17,11 +17,6 @@ const reducer = function(state = initialState, action) {
                     $set: action.payload
                 }
             });
-        /*
-
-          You will need to correct a reducer case for ACCOUNT_SELECTED here - HINT: it should mimic closely the USER_SELECTED case.
-
-        */
 
         case ACCOUNT_SELECTED:
             return update(state, {

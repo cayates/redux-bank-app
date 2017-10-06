@@ -11,22 +11,13 @@ import { Link } from 'react-router-dom';
 class UserDetail extends Component {
 
   render() {
-    const userAccounts = this.props
-    console.log(userAccounts)
-    console.log(this)
     if(!this.props.user) {
       return (
         <div>Please select a user...</div>
       )
     }
-    //get user id from params of URL
-    const { id } = this.props.match.params;
-    // let {userAccounts} = this.props
-    // console.log(userAccounts);
-    //map over the accounts for the user to create links to them.
+  const { id } = this.props.match.params;
     let accounts = this.props.user.accounts.map((accountInfo) => { 
-      //creating a Link with the account type for
-      //each account.
       return (
         <div key={accountInfo.id}>
           <Link
@@ -34,34 +25,30 @@ class UserDetail extends Component {
             to={`/users/${id}/${accountInfo.id}`}>{accountInfo.accountType}</Link>
         </div>
       )
-    })
-    return (
-      <div className="col-md-6">
-        <div className= "card">
-          <div className= "card-block">
-            <h4 className= "card-title">Account Information</h4>
-            <h6 className= "card-subtitle mb-2 text-muted">{this.props.user.name}</h6>
-            <div className= "card-text">
-              <div>{this.props.user.email}</div>
-              <div>{this.props.user.phone}</div>
-              <div>{this.props.user.address}</div>
+      })
+      return (
+        <div className="col-md-6">
+          <div className= "card">
+            <div className= "card-block">
+              <h4 className= "card-title">Account Information</h4>
+              <h6 className= "card-subtitle mb-2 text-muted">{this.props.user.name}</h6>
+              <div className= "card-text">
+                <div>{this.props.user.email}</div>
+                <div>{this.props.user.phone}</div>
+                <div>{this.props.user.address}</div>
+              </div>
+              {accounts}
             </div>
-            {accounts}
+            <Link className="btn btn-primary" to="/users" >Back to List of Users</Link>
           </div>
-          <Link className="btn btn-primary" to="/users" >Back to List of Users</Link>
         </div>
-      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  let accounts = state.users
-  console.log(this.props)
-  console.log(state.selectedAccount)
-  console.log('this is the state of my accounts:', accounts)
-  // console.log(state.users)
-  // console.log(state)
+  console.log('this is what SHOULD be PROPS', this.props)
+  console.log('this is the current state ONLY', state)
   return {
     user: state.selectedUser,
     account: state.selectedAccount
@@ -69,7 +56,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({selectAccount: selectAccount}, dispatch)
+  return bindActionCreators({
+    selectAccount: selectAccount
+  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserDetail);
