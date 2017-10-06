@@ -5,12 +5,15 @@ import { selectUser, selectAccount }  from '../store/actions/index';
 import { bindActionCreators } from 'redux';
 //import router Link
 import { Link } from 'react-router-dom';
-
-
+// import userList from '../data/users';
+// import UserList from './UserList';
 
 class UserDetail extends Component {
 
   render() {
+    const userAccounts = this.props
+    console.log(userAccounts)
+    console.log(this)
     if(!this.props.user) {
       return (
         <div>Please select a user...</div>
@@ -18,18 +21,18 @@ class UserDetail extends Component {
     }
     //get user id from params of URL
     const { id } = this.props.match.params;
+    // let {userAccounts} = this.props
+    // console.log(userAccounts);
     //map over the accounts for the user to create links to them.
-    let accounts = this.props.user.accounts.map(account => {
-
+    let accounts = this.props.user.accounts.map((accountInfo) => { 
       //creating a Link with the account type for
       //each account.
       return (
-        <div key={account.id}>
+        <div key={accountInfo.id}>
           <Link
-            onClick={() => this.props.selectAccount(account)}
-            to={`/users/${id}/${account.id}`}>{account.accountType}</Link>
+            onClick={() => this.props.selectAccount(accountInfo)}
+            to={`/users/${id}/${accountInfo.id}`}>{accountInfo.accountType}</Link>
         </div>
-
       )
     })
     return (
@@ -42,34 +45,31 @@ class UserDetail extends Component {
               <div>{this.props.user.email}</div>
               <div>{this.props.user.phone}</div>
               <div>{this.props.user.address}</div>
-
             </div>
             {accounts}
           </div>
           <Link className="btn btn-primary" to="/users" >Back to List of Users</Link>
         </div>
-
-
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
+  let accounts = state.users
+  console.log(this.props)
+  console.log(state.selectedAccount)
+  console.log('this is the state of my accounts:', accounts)
+  // console.log(state.users)
+  // console.log(state)
   return {
     user: state.selectedUser,
     account: state.selectedAccount
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({selectAccount: selectAccount}, dispatch)
+}
 
-/*
-
-You will need to create a mapDispatchToProps function here and
-return the action creator selectAccount - HINT: see the UserList
-component.
-
-*/
-
-
-export default connect(mapStateToProps)(UserDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(UserDetail);
