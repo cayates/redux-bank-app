@@ -20,6 +20,7 @@ import App from './components/App';
 import UserList from './containers/UserList';
 import UserDetail from './containers/UserDetail';
 import AccountDetail from './containers/AccountDetail';
+import Baselayout from './components/BaseLayout';
 
 //create store for redux and apply middleware
 const createStoreWithMiddleware = applyMiddleware()(createStore);
@@ -28,15 +29,15 @@ const createStoreWithMiddleware = applyMiddleware()(createStore);
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
     <BrowserRouter>
-      {/*Baselayout?*/}
+      <Baselayout>
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/users/:id/:accountID" component={AccountDetail} />
         <Route path="/users/:id" component={UserDetail} />
         <Route path="/users" component={UserList} />
       </Switch>
-      {/*Baselayout?*/}
-    </BrowserRouter>
+      </Baselayout>
+      </BrowserRouter>
   </Provider>
 
 
