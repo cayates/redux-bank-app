@@ -6,12 +6,13 @@ import { selectUser, selectAccount }  from '../store/actions/index';
 import { bindActionCreators } from 'redux';
 //
 
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import { Link } from 'react-router-dom';
 
 class UserDetail extends Component {
 
   render() {
-    console.log(this.props.user)
     if(!this.props.user) {
       return (
         <div>Please select a user...</div>
@@ -32,7 +33,8 @@ class UserDetail extends Component {
         <div className="col-md-6">
           <div className= "card">
             <div className= "card-block">
-              <h4 className= "card-title">Account Information</h4>
+            <Link className="btn btn-primary" to={`/`}>Back to Home</Link>            
+            <h4 className= "card-title">Account Information</h4>
               <h6 className= "card-subtitle mb-2 text-muted">{this.props.user.name}</h6>
               <div className= "card-text">
                 <div>{this.props.user.email}</div>
@@ -49,7 +51,6 @@ class UserDetail extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('this is what SHOULD be PROPS', this.props)
   console.log('this is the current STATE ONLY', state)
   return {
     user: state.selectedUser, 
