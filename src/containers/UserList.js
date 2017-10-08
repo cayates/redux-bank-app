@@ -9,11 +9,10 @@ import { Link } from 'react-router-dom';
 
 class UserList extends Component {
     render() {
-        console.log(this.props)
         let users = this.props.users.map((user) => {
             return (
-                <li key={user._id} className="list-group-item" onClick={() => this.props.selectUser(user._id)}>
-                  <Link to={`/users/${user._id}`}>{user.name}</Link>
+                <li key={user._id} className="list-group-item" onClick={() => this.props.selectUser(user)}>
+                  <Link to={`/users/${user}`}>{user.name}</Link>
                 </li>
             );
         });

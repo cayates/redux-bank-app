@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 class UserDetail extends Component {
 
   render() {
-    console.log('this is what THIS IS AT 14:', this)
     console.log(this.props.user)
     if(!this.props.user) {
       return (
@@ -19,7 +18,8 @@ class UserDetail extends Component {
       )
     }
     const { id } = this.props.match.params;
-    let accounts = this.props.user.accounts.map((accountInfo) => { 
+    const userAccounts = this.props.user
+    let accounts = userAccounts.accounts.map(accountInfo => { 
       return (
         <div key={accountInfo.id}>
           <Link
