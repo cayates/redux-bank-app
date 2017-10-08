@@ -45,8 +45,8 @@ const reducer = function(state = initialState, action) {
                 }
             })
         default:
-            return state;
-            break;
+        return state;
+        break;
     }
 }
 

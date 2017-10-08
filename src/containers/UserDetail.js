@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectUser, selectAccount }  from '../store/actions/index';
+
 //make sure action created flows through all reducers
 import { bindActionCreators } from 'redux';
-//import router Link
+//
+
 import { Link } from 'react-router-dom';
-// import userList from '../data/users';
-// import UserList from './UserList';
 
 class UserDetail extends Component {
 
   render() {
+    console.log('this is what THIS IS AT 14:', this)
+    console.log(this.props.user)
     if(!this.props.user) {
       return (
         <div>Please select a user...</div>
       )
     }
-  const { id } = this.props.match.params;
+    const { id } = this.props.match.params;
     let accounts = this.props.user.accounts.map((accountInfo) => { 
       return (
         <div key={accountInfo.id}>
@@ -48,10 +50,10 @@ class UserDetail extends Component {
 
 function mapStateToProps(state) {
   console.log('this is what SHOULD be PROPS', this.props)
-  console.log('this is the current state ONLY', state)
+  console.log('this is the current STATE ONLY', state)
   return {
-    user: state.selectedUser,
-    account: state.selectedAccount
+    user: state.selectedUser, 
+    account: state.selectedAccount 
   };
 }
 
