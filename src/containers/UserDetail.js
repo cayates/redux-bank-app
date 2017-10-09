@@ -51,7 +51,6 @@ class UserDetail extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('this is the current STATE ONLY', state)
   return {
     user: state.selectedUser, 
     account: state.selectedAccount 
