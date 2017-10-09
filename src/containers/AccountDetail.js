@@ -21,7 +21,7 @@ class AccountDetail extends Component {
                   <h4 className= "card-title">Account Information</h4>
                     <div className= "card-text">
                     <p>{this.props.account.accountType} for {this.props.user.name}</p>
-                    <p>{this.props.account.balance}</p>
+                    <p>Balance: {this.props.account.balance}</p>
                     <Link className="btn btn-primary" to={`/users`}>Back to User Details</Link>                                
                     </div>
                       {arrayOfAccountObjects}
