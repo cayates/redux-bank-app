@@ -33,7 +33,6 @@ class UserDetail extends Component {
         <div className="col-md-6">
           <div className= "card">
             <div className= "card-block">
-            <Link className="btn btn-primary" to={`/`}>Back to Home</Link>            
             <h4 className= "card-title">Account Information</h4>
               <h6 className= "card-subtitle mb-2 text-muted">{this.props.user.name}</h6>
               <div className= "card-text">
@@ -43,7 +42,6 @@ class UserDetail extends Component {
               </div>
               {accounts}
             </div>
-            <Link className="btn btn-primary" to="/users" >Back to List of Users</Link>
           </div>
         </div>
     );

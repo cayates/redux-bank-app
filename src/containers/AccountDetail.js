@@ -22,7 +22,6 @@ class AccountDetail extends Component {
                     <div className= "card-text">
                     <p>{this.props.account.accountType} for {this.props.user.name}</p>
                     <p>Balance: {this.props.account.balance}</p>
-                    <Link className="btn btn-primary" to={`/users`}>Back to User Details</Link>                                
                     </div>
                       {arrayOfAccountObjects}
                     <Transaction />
