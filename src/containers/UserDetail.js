@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectUser, selectAccount }  from '../store/actions/index';
+import { selectAccount }  from '../store/actions/index';
 
 //make sure action created flows through all reducers
 import { bindActionCreators } from 'redux';
 //
-
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 

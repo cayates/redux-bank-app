@@ -22,6 +22,14 @@ class Transaction extends Component {
     });
   }
 
+  subtractFunds(amount) {
+    console.log("amount", amount);
+    this.setState({
+      modal: !this.state.modal
+    });
+    this.props.withdrawFunds(amount)
+  }
+
   render() {
     console.log('this is the state of the modal: >>>', this.state.modal)
     return (
@@ -38,7 +46,6 @@ class Transaction extends Component {
             <Button color="primary" onClick={this.toggle}>$5.00</Button>
             <Button color="secondary" onClick={this.toggle}>$10.00</Button>
             <Button color="secondary" onClick={this.toggle}>$20.00</Button>
-            <Button color="secondary" onClick={this.toggle}>Another amount</Button>
         </ModalFooter>
         </Modal>
       </div>
