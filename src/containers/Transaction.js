@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalFooter, ModalBody } from 'reactstrap';
+import React, {Component} from 'react'
 
-import { connect } from 'react-redux';
-import { withdrawFunds }  from '../store/actions/index';
+import ReactDOM from 'react-dom';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {connect} from 'react-redux';
+import { withdrawFunds } from '../store/actions/index';
 
-import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 
 class Transaction extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
     };
 
     this.toggle = this.toggle.bind(this);
+    this.subtractFunds = this.subtractFunds.bind(this);
   }
 
   toggle() {
     this.setState({
-        modal: !this.state.modal
+      modal: !this.state.modal
     });
   }
 
@@ -31,41 +33,38 @@ class Transaction extends Component {
   }
 
   render() {
-    console.log('this is the state of the modal: >>>', this.state.modal)
+    console.log("this.state", this.state);
     return (
-      <div>
-        <Button color="danger" onClick={this.toggle}>Withdraw Funds</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-        <ModalHeader toggle={this.toggle}>
-            <p>Pick an amount to withdraw</p>
-        </ModalHeader>
-          <ModalBody>
-            <p>Modal body</p>
-          </ModalBody>
-        <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>$5.00</Button>
-            <Button color="secondary" onClick={this.toggle}>$10.00</Button>
-            <Button color="secondary" onClick={this.toggle}>$20.00</Button>
-        </ModalFooter>
-        </Modal>
+      <div className="pl-3">
+          <Button color="danger" onClick={this.toggle}>Withdraw Funds</Button>
+          <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+            <ModalHeader toggle={this.toggle}>Would you like to make a withdrawal from your account?</ModalHeader>
+            <ModalBody>
+              <p>Are you sure you want to withdraw from your {this.props.account.accountType} account? Your current balance is: {this.props.account.balance}</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={() => this.subtractFunds(5)}>$5</Button>
+              <Button color="success" onClick={() => this.subtractFunds(10)}>$10</Button>
+              <Button color="info" onClick={() => this.subtractFunds(20)}>$20</Button>
+              <Button color="danger" onClick={() => this.subtractFunds(0)}>Cancel</Button>              
+            </ModalFooter>
+          </Modal>
       </div>
-    );
+    )
   }
 }
 
 function mapStateToProps(state) {
-    console.log('this is state.selectedUser >>>>>', state.selectedUser)
-    console.log('this is state.selectedAccount >>>>>', state.selectedAccount)    
-    return {
-      selectedUser: state.selectedUser,
-      account: state.selectedAccount
-    };
+  console.log("state", state);
+  return {user: state.selectedUser, account: state.selectedAccount};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    withdrawFunds: function(amount) {
+      dispatch(withdrawFunds(amount))
+    }
   }
-  
-  function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-      withdrawFunds: withdrawFunds
-    }, dispatch)
-  }
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Transaction);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Transaction)

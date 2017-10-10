@@ -2,23 +2,25 @@ export const USER_SELECTED = "USER_SELECTED";
 export const ACCOUNT_SELECTED = "ACCOUNT_SELECTED";
 export const WITHDRAW_FUNDS = "WITHDRAW_FUNDS";
 
-export function selectUser(userId) {
+export const selectUser = function (userInfo) {
   return {
     type: USER_SELECTED,
-    payload: userId
+    payload: userInfo
   };
 }
 
-// You will need to create a selectAccount
-// action creator here, it will take a type, and
-// payload: accountId
-
-export function selectAccount(accountId) {
-  return {
+export const selectAccount = function (accountInfo) {
+  return{
     type: ACCOUNT_SELECTED,
-    payload: accountId
+    payload: accountInfo
   };
 }
+
+/************************************
+You will need to create a selectAccount
+action creator here, it will take a type, and
+payload: accountId
+************************************/
 
 export function withdrawFunds(amount) {
   return {

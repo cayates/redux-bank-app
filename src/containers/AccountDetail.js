@@ -1,46 +1,44 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { selectAccount }  from '../store/actions/index';
+import React, {Component} from 'react'
 
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {withdrawFunds} from '../store/actions/index';
 import Transaction from './Transaction';
-
-import { bindActionCreators } from 'redux';
+import '../styles/App.css';
 
 class AccountDetail extends Component {
-    render(){
-        console.log(this.props.user.accounts)
-        let arrayOfAccountObjects = this.props.user.accounts.map((typeOfAccount)=>{
-            return (
-                    <div key={typeOfAccount.id}>
-                    </div>  
-            )
-        })
-            return (
-                <div className="col-md-6">
-                  <h4 className= "card-title">Account Information</h4>
-                    <div className= "card-text">
-                    <p>{this.props.account.accountType} for {this.props.user.name}</p>
-                    <p>Balance: {this.props.account.balance}</p>
-                    </div>
-                      {arrayOfAccountObjects}
-                    <Transaction />
-              </div>
-            )
-    }
+  render() {
+    let account = this.props.user.accounts
+    return (
+        <div className="card text-center">
+          <div className="card-header">
+            <h2>Account Information</h2>
+          </div>
+          <div className="card-body">
+            <h2 className="card-title">{this.props.account.accountType} account 
+              for {this.props.user.name} ... </h2>
+            <div className="card-text">
+              Balance: {this.props.account.balance}
+            </div>
+          </div>
+            <Transaction/>            
+        </div>
+    )
+  }
 }
 
 function mapStateToProps(state) {
-    console.log(state.selectedAccount.accountType)
-    return {
-      user: state.selectedUser, 
-      account: state.selectedAccount 
-    };
+  console.log("state.selectedAccount", state.selectedAccount);
+  return {user: state.selectedUser, account: state.selectedAccount};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    withdrawFunds: function(amount) {
+      dispatch(withdrawFunds(amount))
+    }
   }
-  
-  function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-      selectAccount: selectAccount
-    }, dispatch)
-  }
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(AccountDetail);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountDetail);

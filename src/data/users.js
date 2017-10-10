@@ -1,5 +1,29 @@
 const userList = () => {
     return [
+      {
+        _id:"597f7521f2dbcd766436457685679",
+        name:"Chad Yates",
+        email:"cayates1989@baller.com",
+        phone:"+1 (843) 751-6721",
+        address:"Nunya Business, bro!",
+        accounts:[
+           {
+              id:0,
+              accountType:"checking",
+              balance:99872634.14
+           },           
+           {
+            id:1,
+            accountType:"savings",
+            balance:99872634.14
+         },
+           {
+              id:2,
+              accountType:"credit",
+              balance:99872634.14
+           }
+        ]
+     },
        {
           _id:"597f7521f2dbcd7664363339",
           name:"Ruth Walton",
